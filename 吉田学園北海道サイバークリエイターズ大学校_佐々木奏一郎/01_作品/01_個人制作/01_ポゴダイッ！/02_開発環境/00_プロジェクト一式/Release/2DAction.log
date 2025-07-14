@@ -1,0 +1,8 @@
+﻿  main.cpp
+C:\Users\student\source\repos\2DAction\stageselect.h(29,2): warning C4094: タグのない 'struct' がシンボルなしで宣言されています。
+  コード生成しています。
+  0 of 160 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  コード生成が終了しました。
+  2DAction.vcxproj -> C:\Users\student\source\repos\2DAction\2DAction.exe
