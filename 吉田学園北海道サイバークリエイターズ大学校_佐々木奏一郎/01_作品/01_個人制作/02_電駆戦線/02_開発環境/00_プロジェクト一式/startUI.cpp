@@ -1,0 +1,134 @@
+//**********************************
+//
+// スタンUI処理 [stanUI.cpp]
+// Author:Sasaki Soichiro
+//
+//**********************************
+
+//*******************
+// インクルード
+//*******************
+#include "startUI.h"
+#include "manager.h"
+#include "texture.h"
+#include "renderer.h"
+
+//*****************
+// コンストラクタ
+//*****************
+CStartUI::CStartUI(int nPriority) :CObject2D(nPriority)
+{
+	m_nIdxTexture = 0;	// インデックス
+}
+
+//*****************
+// デストラクタ
+//*****************
+CStartUI::~CStartUI()
+{
+}
+
+//*****************
+// 初期化処理
+//*****************
+HRESULT CStartUI::Init(D3DXVECTOR3 pos)
+{
+	CTexture* pTexture = CManager::GetCTexture();
+	CObject2D::BindTexture(pTexture->GetAddres(m_nIdxTexture));
+
+	CObject2D::Init(pos);						// 2Dの初期化
+
+	// UVの設定
+	CObject2D::SetTex(D3DXVECTOR2(0.0f, 0.0f),
+		D3DXVECTOR2(1.0f, 0.0f),
+		D3DXVECTOR2(0.0f, 1.0f),
+		D3DXVECTOR2(1.0f, 1.0f));
+	// 大きさの設定
+	CObject2D::SetSize(D3DXVECTOR2(500.0f, 100.0f));
+	return S_OK;
+}
+
+//*****************
+// 終了処理
+//*****************
+void CStartUI::Uninit(void)
+{
+	// 終了処理
+	CObject2D::Uninit();
+}
+
+//*****************
+// 更新処理
+//*****************
+void CStartUI::Update(void)
+{
+
+}
+
+//*****************
+// 描画処理
+//*****************
+void CStartUI::Draw(void)
+{
+	// デバイスの取得
+	LPDIRECT3DDEVICE9 pDevice;
+	CRenderer* renderer = CManager::GetCRenderer();
+	pDevice = renderer->GetDevice();
+
+	// 描画処理
+	CObject2D::Draw();
+}
+
+//******************
+// インスタンス生成
+//******************
+CStartUI* CStartUI::Create(D3DXVECTOR3 pos)
+{
+	CStartUI* TitleUI;								// ライフのポインタ
+	CTexture* pTexture = CManager::GetCTexture();	// テクスチャのポインタ
+
+	int nNum = CObject::GetNumAll();// 現在のオブジェクト総数取得
+	if (nNum < MAX_OBJ - 1)
+	{// 最大オブジェクト数を超えていなかったら
+
+		TitleUI = new CStartUI;// インスタンス生成
+		// テクスチャ
+		TitleUI->m_nIdxTexture = pTexture->Register("data\\TEXTURE\\gamestart.png");
+
+		// 初期化
+		TitleUI->Init(pos);
+
+		// 情報を渡す
+		return TitleUI;
+	}
+
+	// (失敗したら)NULLを返す
+	return NULL;
+}
+
+//*****************
+// 位置設定
+//*****************
+void CStartUI::SetPos(D3DXVECTOR3 pos)
+{
+	// 位置設定
+	CObject2D::SetPos(pos);
+}
+
+//*****************
+// 向き設定
+//*****************
+void CStartUI::SetRot(D3DXVECTOR3 rot)
+{
+	// 位置設定
+	CObject2D::SetRot(rot);
+}
+
+//*****************
+// 位置情報取得
+//*****************
+D3DXVECTOR3 CStartUI::GetPos(void)
+{
+	// 位置情報取得
+	return CObject2D::GetPos();
+}
