@@ -573,7 +573,7 @@ Mesh {
    0.680000;0.680000;0.680000;;
    1.000000;1.000000;1.000000;;
    TextureFilename {
-    "C:\\Users\\student\\Desktop\\spacesky.jpg";
+    "data\\TEXTURE\\spacesky.jpg";
    }
   }
  }
